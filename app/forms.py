@@ -14,5 +14,3 @@ class ProfileForm(forms.ModelForm):
         fields = ['address','profile_image']
         
 
-for field in self.fields.values():
-    field.widget.attrs.update({'class': 'form-control'})
