@@ -1,0 +1,113 @@
+{% extends 'dummy.html' %}
+
+{% block title %}
+<title>Registration Page</title>
+{% endblock %}
+
+{% block body_block %}
+
+<style>
+    .register-wrapper {
+        max-width: 900px;
+        margin: auto;
+        margin-top: 40px;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .register-title {
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    .form-group label {
+        font-weight: 500;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    .btn-register {
+        width: 100%;
+        border-radius: 25px;
+        padding: 12px;
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        border: none;
+        color: white;
+        font-weight: 500;
+        margin-top: 20px;
+    }
+
+    .section-title {
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 15px;
+        color: #555;
+    }
+
+    .extra-links {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="register-wrapper">
+
+    <h2 class="register-title">📝 Create Account</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- USER DETAILS -->
+        <div class="section-title">👤 User Details</div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Username</label>
+                {{ uf.username }}
+            </div>
+
+            <div class="form-group col-md-6">
+                <label>Email</label>
+                {{ uf.email }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Password</label>
+                {{ uf.password }}
+            </div>
+        </div>
+
+        <!-- PROFILE DETAILS -->
+        <div class="section-title">🏠 Profile Details</div>
+
+        <div class="form-group">
+            <label>Address</label>
+            {{ pf.address }}
+        </div>
+
+        <div class="form-group">
+            <label>Profile Picture</label>
+            {{ pf.profile_pic }}
+        </div>
+
+        <!-- BUTTON -->
+        <button type="submit" class="btn btn-register">Register</button>
+
+    </form>
+
+    <div class="extra-links">
+        Already have an account? 
+        <a href="{% url 'user_login' %}">Login</a>
+    </div>
+
+</div>
+
+{% endblock %}

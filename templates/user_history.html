@@ -1,0 +1,95 @@
+{% extends 'dummy.html' %}
+
+{% block title %}
+<title>User History</title>
+{% endblock %}
+
+{% block body_block %}
+
+<style>
+    .history-container {
+        margin-top: 30px;
+        padding: 25px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .history-title {
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .table thead {
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        color: white;
+    }
+
+    .table tbody tr:hover {
+        background-color: #fff3e6;
+        transition: 0.3s;
+    }
+
+    .badge-weather {
+        padding: 5px 10px;
+        border-radius: 10px;
+        background: #ffe0b2;
+        color: #e65100;
+        font-weight: 500;
+    }
+
+    .empty-msg {
+        text-align: center;
+        font-weight: 500;
+        color: gray;
+        padding: 20px;
+    }
+</style>
+
+<div class="history-container">
+
+    <h2 class="history-title">📊 Your Weather History</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center">
+
+            <thead>
+                <tr>
+                    <th>👤 Username</th>
+                    <th>📍 City</th>
+                    <th>🌡 Temperature</th>
+                    <th>💧 Humidity</th>
+                    <th>🌥 Weather</th>
+                    <th>🌬 Speed</th>
+                    <th>⏱ Timestamp</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for obj in LWO %}
+                <tr>
+                    <td>{{ obj.username }}</td>
+                    <td>{{ obj.city }}</td>
+                    <td>{{ obj.temperature }} °C</td>
+                    <td>{{ obj.humidity }} %</td>
+                    <td>
+                        <span class="badge-weather">{{ obj.weather }}</span>
+                    </td>
+                    <td>{{ obj.speed }} km/h</td>
+                    <td>{{ obj.timestamp }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="empty-msg">No history available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

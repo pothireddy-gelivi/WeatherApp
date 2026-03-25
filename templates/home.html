@@ -1,0 +1,139 @@
+{% extends 'dummy.html' %}
+
+{% block title %}
+<title>Weather App</title>
+{% endblock %}
+
+{% block body_block %}
+
+<style>
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-top: 10px;
+    opacity: 0.9;
+}
+
+/* Search box */
+.search-box {
+    margin-top: 30px;
+}
+
+.search-box input {
+    width: 60%;
+    max-width: 400px;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+}
+
+.search-box button {
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+    color: white;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+/* Features */
+.features {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: rgba(255,255,255,0.1);
+    padding: 20px;
+    border-radius: 15px;
+    width: 250px;
+    margin: 10px;
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.feature-card h4 {
+    margin-bottom: 10px;
+}
+
+/* CTA */
+.cta {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.btn-cta {
+    padding: 12px 30px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+</style>
+
+<div class="hero">
+
+    {% if username %}
+        <h1>🌤 Welcome {{ username }}</h1>
+        <p>Check live weather updates instantly</p>
+    {% else %}
+        <h1>🌦 Weather Forecast App</h1>
+        <p>Get real-time weather updates for any city in the world</p>
+    {% endif %}
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="city" placeholder="Enter city name..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+</div>
+
+<!-- FEATURES -->
+<div class="features">
+
+    <div class="feature-card">
+        <h4>🌡 Temperature</h4>
+        <p>Accurate real-time temperature updates</p>
+    </div>
+
+    <div class="feature-card">
+        <h4>💧 Humidity</h4>
+        <p>Know humidity levels instantly</p>
+    </div>
+
+    <div class="feature-card">
+        <h4>🌬 Wind Speed</h4>
+        <p>Track wind speed in your city</p>
+    </div>
+
+</div>
+
+<!-- CTA -->
+{% if not username %}
+<div class="cta">
+    <h3 style="color:white;">🚀 Join now and track weather history!</h3>
+    <br>
+    <a href="{% url 'registration' %}" class="btn-cta">Register Now</a>
+</div>
+{% endif %}
+
+{% endblock %}
