@@ -7,6 +7,8 @@ class Profile(models.Model):
     address = models.TextField()
     profile_image = models.ImageField(upload_to='abcd')
 
+    
+
 
 class WeatherData(models.Model):
     username = models.ForeignKey(User,on_delete=models.CASCADE,default=0)

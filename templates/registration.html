@@ -1,113 +1,70 @@
-{% extends 'dummy.html' %}
-
-{% block title %}
-<title>Registration Page</title>
-{% endblock %}
-
-{% block body_block %}
-
-<style>
-    .register-wrapper {
-        max-width: 900px;
+{% block title %} <title>Registration Page</title> {% endblock %} {% block body_block %} <style>
+    .register-container {
+        max-width: 600px;
         margin: auto;
+        padding: 35px;
+        border-radius: 15px;
+        background: #ffffff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         margin-top: 40px;
-        background: white;
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
     .register-title {
         text-align: center;
         font-weight: 600;
-        margin-bottom: 30px;
-    }
-
-    .form-group label {
-        font-weight: 500;
+        margin-bottom: 25px;
+        color: #333;
     }
 
     .form-control {
         border-radius: 10px;
         padding: 10px;
+        transition: 0.3s;
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 10px rgba(91, 134, 229, 0.5);
+        border-color: #5b86e5;
     }
 
     .btn-register {
         width: 100%;
         border-radius: 25px;
-        padding: 12px;
+        padding: 10px;
         background: linear-gradient(90deg, #ff7e5f, #feb47b);
         border: none;
         color: white;
         font-weight: 500;
-        margin-top: 20px;
+        transition: 0.3s;
     }
 
-    .section-title {
-        font-weight: 600;
-        margin-top: 20px;
-        margin-bottom: 15px;
-        color: #555;
+    .btn-register:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
     .extra-links {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 15px;
+    }
+
+    .extra-links a {
+        text-decoration: none;
+        color: #ff7e5f;
+        font-weight: 500;
+    }
+
+    .extra-links a:hover {
+        text-decoration: underline;
     }
 </style>
-
-<div class="register-wrapper">
-
-    <h2 class="register-title">📝 Create Account</h2>
-
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <!-- USER DETAILS -->
-        <div class="section-title">👤 User Details</div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Username</label>
-                {{ uf.username }}
-            </div>
-
-            <div class="form-group col-md-6">
-                <label>Email</label>
-                {{ uf.email }}
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Password</label>
-                {{ uf.password }}
-            </div>
-        </div>
-
-        <!-- PROFILE DETAILS -->
-        <div class="section-title">🏠 Profile Details</div>
-
-        <div class="form-group">
-            <label>Address</label>
-            {{ pf.address }}
-        </div>
-
-        <div class="form-group">
-            <label>Profile Picture</label>
-            {{ pf.profile_pic }}
-        </div>
-
-        <!-- BUTTON -->
-        <button type="submit" class="btn btn-register">Register</button>
-
+<div class="register-container">
+    <h2 class="register-title">📝 Create Your Account</h2>
+    <form method="POST" enctype="multipart/form-data"> {% csrf_token %} <!-- User Form -->
+        <div class="mb-3"> {{ uf.as_p }} </div> <!-- Profile Form -->
+        <div class="mb-3"> {{ pf.as_p }} </div> <button type="submit" class="btn btn-register">Register</button>
     </form>
-
     <div class="extra-links">
-        Already have an account? 
-        <a href="{% url 'user_login' %}">Login</a>
+        <p>Already have an account? <a href="{% url 'user_login' %}">Login here</a> </p>
     </div>
-
-</div>
-
-{% endblock %}
+</div> {% endblock %}

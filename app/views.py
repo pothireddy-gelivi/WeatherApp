@@ -33,13 +33,7 @@ def registration(request):
             PFO.profile_user=UFO
             PFO.save()
 
-            send_mail('registration',
-            'Thanks for registartion,your registration is Successfull',
-            'pothireddy2002@gmail.com',
-            [UFO.email],
-            fail_silently=False
-            
-            )
+           
             return HttpResponse('registration is succeffull')
     return render(request,'registration.html',context)
 
