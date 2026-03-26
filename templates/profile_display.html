@@ -58,30 +58,20 @@
         background: linear-gradient(90deg, #36d1dc, #5b86e5);
         border: none;
         color: white;
-        transition: 0.3s;
-    }
-
-    .btn-edit:hover {
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 </style>
 
 <div class="profile-container">
 
-    <!-- Profile Image -->
-    {% if PO.profile_pic %}
-        <img src="{{PO.profile_pic.url}}" class="profile-pic">
+    {% if PO.profile_image %}
+        <img src="{{ PO.profile_image.url }}" class="profile-pic">
     {% else %}
         <img src="https://via.placeholder.com/150" class="profile-pic">
     {% endif %}
 
-    <!-- Name -->
     <div class="profile-name">{{ UO.username }}</div>
 
-    <!-- Info -->
     <div class="profile-info">
-
         <div class="info-box">
             <span class="label">📧 Email:</span> {{ UO.email }}
         </div>
@@ -89,11 +79,9 @@
         <div class="info-box">
             <span class="label">🏠 Address:</span> {{ PO.address }}
         </div>
-
     </div>
 
-    <!-- Button (optional) -->
-    <a href="#" class="btn btn-edit">Edit Profile</a>
+    <a href="{% url 'edit_profile' %}" class="btn btn-edit">Edit Profile</a>
 
 </div>
 

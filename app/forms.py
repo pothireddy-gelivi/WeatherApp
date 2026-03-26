@@ -13,4 +13,3 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['address','profile_image']
         
-

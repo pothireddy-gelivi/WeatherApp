@@ -62,7 +62,8 @@
     <h2 class="register-title">📝 Create Your Account</h2>
     <form method="POST" enctype="multipart/form-data"> {% csrf_token %} <!-- User Form -->
         <div class="mb-3"> {{ uf.as_p }} </div> <!-- Profile Form -->
-        <div class="mb-3"> {{ pf.as_p }} </div> <button type="submit" class="btn btn-register">Register</button>
+        <div class="mb-3"> {{ pf.as_p }} </div> 
+        <button type="submit" class="btn btn-register">Register</button>
     </form>
     <div class="extra-links">
         <p>Already have an account? <a href="{% url 'user_login' %}">Login here</a> </p>

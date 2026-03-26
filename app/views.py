@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from app.forms import *
 from django.http import HttpResponse,HttpResponseRedirect
 import requests
@@ -34,7 +34,7 @@ def registration(request):
             PFO.save()
 
            
-            return HttpResponse('registration is succeffull')
+            return HttpResponseRedirect(reverse('user_login'))
     return render(request,'registration.html',context)
 
 def user_login(request):
@@ -75,7 +75,7 @@ def change_password(request):
 
         UO.set_password(pw)
         UO.save()
-        return HttpResponse('password is changed successfully')
+        return HttpResponse('succssfully changed your password')
     return render(request,'change_password.html')
 
 def reset_password(request):
@@ -129,3 +129,16 @@ def all_history(request):
     LWO=WeatherData.objects.all()
     context={'LWO':LWO}
     return render(request,'all_history.html',context)
+
+def edit_profile(request):
+    PO = request.user.profile
+
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=PO)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_display')
+    else:
+        form = ProfileForm(instance=PO)
+
+    return render(request, 'edit_profile.html', {'form': form})
